@@ -1,0 +1,15 @@
+set host [lindex $argv 0]
+set user [lindex $argv 1]
+set pass [lindex $argv 2]
+
+set timeout 1
+
+spawn ssh $user@$host
+expect "yes/no" {
+  send "yes\r"
+}
+expect "password:" {
+  send "$pass\r"
+}
+
+interact
