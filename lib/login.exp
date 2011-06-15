@@ -1,10 +1,12 @@
 set host [lindex $argv 0]
 set user [lindex $argv 1]
 set pass [lindex $argv 2]
+set param [lindex $argv 3]
+set cmd [lindex $argv 4]
 
-set timeout 1
+set timeout 10
 
-spawn ssh $user@$host
+spawn ssh $param $user@$host $cmd
 expect "yes/no" {
   send "yes\r"
 }
