@@ -1,0 +1,18 @@
+{
+  "name": "NodeSSH",
+  "description": "SSH Client for NodeJS",
+  "version": "0.5.0",
+  "author": "tsmith",
+  "repository": "git://github.com/Trakkasure/NodeSSH.git",
+  "maintainers": [ 
+    { "name": "tsmith", "email": "" 
+      "name": "Brandon Myers", "email": "trakkasure@gmail.com"}
+  ],
+  "contributors": [ 
+    { "name": "tsmith", "email": "" 
+      "name": "Brandon Myers", "email": "trakkasure@gmail.com"}
+  ],
+  keywords: ["ssh","net","expect"],
+  "main": "lib/index.js",
+  "engines": { "node": ">= 0.2.0" }
+}
