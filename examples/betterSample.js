@@ -1,13 +1,13 @@
 var SSHClient = require("NodeSSH");
 var Expect = require('node-expect');
 
-var ssh=new SSHClient(addresses,user,password);
+var ssh=new SSHClient("ipOrHostname","user", "password");
 function close(addr) {
-    console.log('('+addresses.length+') Disconnected from '+addr);
+    console.log('Disconnected from '+addr);
 }
 
-function connect() {
-    console.log('Connected to '+this.address);
+function connect(addr) {
+    console.log('Connected to '+addr);
 }
 
 function doUptime(match) {
@@ -15,16 +15,14 @@ function doUptime(match) {
 }
 
 parser = new Expect();
-prompt=/\$ /;
-parser.conversation(prompt)
+parser.conversation("logged")
         .sync() // synchronous conversation.
-        .expect() // the conversation trigger starts the expect. no need to expect anything more.
-            .send("uptime")
-        .expect(/uptime/) // expect the command to be echo'd back to us.
+        .expect(null,true) // the conversation trigger starts the expect. no need to expect anything more.
+            .send("uptime\n")
         .expect(/\n([^\r]+)/)
             .handler(doUptime) // call the doUptime function with the match results.
-        .expect(prompt)
-            .send("exit")
+        .expect("# ")
+            .send("exit\n")
             .emit("close")
             .end()
       .monitor(ssh)
@@ -32,3 +30,4 @@ parser.conversation(prompt)
 ssh.on('close',close);
 
 ssh.connect(connect);
+
