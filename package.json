@@ -12,7 +12,7 @@
     { "name": "tsmith", "email": "" 
       "name": "Brandon Myers", "email": "trakkasure@gmail.com"}
   ],
-  keywords: ["ssh","net","expect"],
+  "keywords": ["ssh","net","expect"],
   "main": "lib/index.js",
   "engines": { "node": ">= 0.2.0" }
 }
