@@ -13,6 +13,36 @@ have this installed. This will not work with windows machines.
 How to use
 ------------------------------------------------------------------------
 
-Check out the file "sample.js". It should help show you all you need ;)
+Here's an example usage.
 A better version with node-expect is in betterSample.js
 
+```javascript
+
+var SSHClient = require("NodeSSH");
+
+var ssh=new SSHClient(addresses,user,password);
+var cmds=["uptime","logout"];
+function close(addr) {
+    console.log('('+addresses.length+') Disconnected from '+addr);
+}
+
+function data(buffer) {
+    s=buffer.toString();
+    if (/\$ /.test(s)) {
+       if (cmd=cmds.shift())
+          ssh.write(cmd+"\r\n");
+       else ssh.close();
+    }
+}
+
+function connect() {
+    console.log('Connected to '+this.address);
+    this.on('data',data);
+}
+
+ssh.on('close',close);
+
+
+ssh.connect(connect);
+
+```
